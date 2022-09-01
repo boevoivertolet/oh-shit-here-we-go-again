@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 import {FilterValuesType} from './App';
 
 
@@ -22,16 +22,31 @@ export function Todolist(props: TodolistPropsType) {
 
     const [newTaskTitle, setNewTaskTitle] = useState('')
     const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-        setNewTaskTitle(event.currentTarget.value)
+        setNewTaskTitle(event.currentTarget.value);
     }
+    const onClickHandler = () => {
+        props.addTask(newTaskTitle)
+        setNewTaskTitle('')
+    }
+    const onKeyPressHandler = (event: KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === 'Enter') {
+            props.addTask(newTaskTitle)
+            setNewTaskTitle('')
+        }
 
+
+    }
 
     return (
         <div>
             <h3>{props.title}</h3>
             <div>
-                <input value={newTaskTitle} onChange={onChangeHandler}/>
-                <button onClick={() => props.addTask(newTaskTitle)}>+</button>
+                <input
+                    value={newTaskTitle}
+                    onChange={onChangeHandler}
+                    onKeyPress={onKeyPressHandler}
+                />
+                <button onClick={onClickHandler}>+</button>
             </div>
             <ul>
                 {
