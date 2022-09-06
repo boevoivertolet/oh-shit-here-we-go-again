@@ -13,10 +13,10 @@ export type FilterValuesType = 'all' | 'completed' | 'active';
 
 
 function App() {
-    let todolists: Array<TodolistType> = [
+    let [todolists, setTodolist] = useState<Array<TodolistType>>([
         {todolistsId: v1(), title: 'what to learn', filter: 'active'},
         {todolistsId: v1(), title: 'what to buy', filter: 'completed'}
-    ]
+    ])
 
     let [tasks, setTasks] = useState<Array<TasksType>>([
         {taskId: v1(), title: 'CSS&HTML', isDone: true},
@@ -38,9 +38,13 @@ function App() {
         setTasks(resultTasks);
     }
 
-    function changeFilter(todolistsId: string,value: FilterValuesType) {
+    function changeFilter(todolistsId: string, value: FilterValuesType) {
+        let todolistFilter = todolists.find(todolist => todolist.todolistsId === todolistsId)
+        if (todolistFilter) {
+            todolistFilter.filter = value
+            setTodolist([...todolists])
+        }
 
-        setFilter(value);
 
     }
 
@@ -53,8 +57,6 @@ function App() {
 
 
     }
-
-
 
 
     return (
