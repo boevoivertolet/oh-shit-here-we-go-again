@@ -1,9 +1,18 @@
 .App {
-  padding: 30px;
-  display: flex;
-  font-size: 22px;
+    padding: 30px;
+    display: flex;
+    font-size: 22px;
 }
 
 .App > div {
-  margin-right: 50px;
+    margin-right: 50px;
+}
+
+.error {
+    border: deeppink 2px dashed;
+    background:pink ;
+}
+
+.error-message {
+    color: deeppink;
 }
