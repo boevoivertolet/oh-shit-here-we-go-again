@@ -16,7 +16,7 @@ type TodolistPropsType = {
     removeTask: (taskId: string) => void
     changeFilter: (value: FilterValuesType) => void
     addTask: (newTaskTitle: string) => void
-    changeTaskStatus:(taskId: string, isDone: boolean)=> void
+    changeTaskStatus: (taskId: string, isDone: boolean) => void
 }
 
 export function Todolist(props: TodolistPropsType) {
@@ -26,7 +26,9 @@ export function Todolist(props: TodolistPropsType) {
         setNewTaskTitle(event.currentTarget.value);
     }
     const addTask = () => {
-        props.addTask(newTaskTitle);
+        if (newTaskTitle.trim() !== '') {
+            props.addTask(newTaskTitle.trim());
+        }
         setNewTaskTitle('');
     }
     const onKeyPressHandler = (event: KeyboardEvent<HTMLInputElement>) => {
@@ -66,7 +68,7 @@ export function Todolist(props: TodolistPropsType) {
                             const onClickRemoveTask = () => {
                                 props.removeTask(task.id)
                             }
-                            const checkboxOnChange = (event:ChangeEvent<HTMLInputElement>) => {
+                            const checkboxOnChange = (event: ChangeEvent<HTMLInputElement>) => {
                                 props.changeTaskStatus(task.id, event.currentTarget.checked);
 
                             }
