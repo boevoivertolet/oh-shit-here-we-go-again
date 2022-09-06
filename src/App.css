@@ -16,3 +16,11 @@
 .error-message {
     color: deeppink;
 }
+.active-filter {
+    background: lightskyblue;
+    color:whitesmoke;
+    border: blue 2px solid;
+}
+.is-done {
+    opacity: 0.3;
+}
