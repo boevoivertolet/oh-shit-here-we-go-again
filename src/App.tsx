@@ -74,7 +74,7 @@ function App() {
 
     }
 
-    function changeTaskStatus(todolistId: string ,taskId: string, isDone: boolean) {
+    function changeTaskStatus(todolistId: string, taskId: string, isDone: boolean) {
         let tasksForChangeStatus = tasks[todolistId]
         let task = tasksForChangeStatus.find(task => task.taskId === taskId)
         if (task) {
@@ -83,7 +83,11 @@ function App() {
         }
         setTasks({...tasks})
 
+    }
 
+    function removeTodolist(todolistId: string) {
+        let filteredTodolist = todolists.filter(todolist => todolist.todolistsId !== todolistId)
+        setTodolist(filteredTodolist)
     }
 
 
@@ -108,6 +112,7 @@ function App() {
                     changeTaskStatus={changeTaskStatus}
                     filter={todolist.filter}
                     todolistsId={todolist.todolistsId}
+                    removeTodolist={removeTodolist}
                 />
             })}
 

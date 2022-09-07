@@ -2,10 +2,15 @@
     padding: 30px;
     display: flex;
     font-size: 22px;
+
 }
 
 .App > div {
     margin-right: 50px;
+    border: black solid 1px;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
 }
 
 .error {
