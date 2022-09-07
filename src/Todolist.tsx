@@ -13,10 +13,10 @@ export type TasksType = {
 type TodolistPropsType = {
     title: string
     tasks: Array<TasksType>
-    removeTask: (taskId: string) => void
+    removeTask: (taskId: string, todolistId: string) => void
     changeFilter: (todolistsId: string,value: FilterValuesType) => void
-    addTask: (newTaskTitle: string) => void
-    changeTaskStatus: (taskId: string, isDone: boolean) => void
+    addTask: (todolistId: string, newTaskTitle: string) => void
+    changeTaskStatus: (todolistId: string ,taskId: string, isDone: boolean) => void
     filter: FilterValuesType
     todolistsId: string
 }
@@ -31,7 +31,7 @@ export function Todolist(props: TodolistPropsType) {
     }
     const addTask = () => {
         if (newTaskTitle.trim() !== '') {
-            props.addTask(newTaskTitle.trim());
+            props.addTask(props.todolistsId,newTaskTitle.trim());
         } else {
             setError('field is required')
         }
@@ -40,7 +40,7 @@ export function Todolist(props: TodolistPropsType) {
     const onKeyPressHandler = (event: KeyboardEvent<HTMLInputElement>) => {
         setError(null)
         if (event.key === 'Enter') {
-            props.addTask(newTaskTitle);
+            props.addTask(props.todolistsId,newTaskTitle);
             setNewTaskTitle('');
         }
 
@@ -75,10 +75,10 @@ export function Todolist(props: TodolistPropsType) {
                 {
                     props.tasks.map(task => {
                             const onClickRemoveTask = () => {
-                                props.removeTask(task.taskId)
+                                props.removeTask(task.taskId, props.todolistsId)
                             }
                             const checkboxOnChange = (event: ChangeEvent<HTMLInputElement>) => {
-                                props.changeTaskStatus(task.taskId, event.currentTarget.checked);
+                                props.changeTaskStatus(props.todolistsId, task.taskId, event.currentTarget.checked);
 
                             }
                             return <li key={task.taskId}><input onChange={checkboxOnChange} type="checkbox"
