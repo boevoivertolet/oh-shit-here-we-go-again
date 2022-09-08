@@ -39,7 +39,6 @@ function App() {
     ])
 
 
-
     function addTask(todolistId: string, newTaskTitle: string) {
         let task = {taskId: v1(), title: newTaskTitle, isDone: false};
         let tasksObj = tasks[todolistId]
@@ -83,11 +82,17 @@ function App() {
         setTasks({...tasks})
     }
 
+    function addTodolist(newTodolistTitle: string) {
+        let todolist: TodolistType = {todolistsId: v1(), title: newTodolistTitle, filter: 'all'}
+        setTodolist([todolist, ...todolists])
+        setTasks({...tasks, [todolist.todolistsId]: []})
+    }
+
 
     return (
         <div className="App">
 
-            <AddItemForm addItem={(newTaskTitle:string) => {alert(newTaskTitle)}}/>
+            <AddItemForm addItem={addTodolist}/>
 
 
             {todolists.map((todolist) => {
