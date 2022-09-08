@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import './App.css';
 import {TasksType, Todolist} from './Todolist';
 import {v1} from 'uuid';
+import {AddItemForm} from './AddItemForm';
 
 export type TodolistType = {
     todolistsId: string
@@ -15,12 +16,6 @@ export type FilterValuesType = 'all' | 'completed' | 'active';
 function App() {
     let todolistsId1 = v1()
     let todolistsId2 = v1()
-
-
-    let [todolists, setTodolist] = useState<Array<TodolistType>>([
-        {todolistsId: todolistsId1, title: 'what to learn', filter: 'active'},
-        {todolistsId: todolistsId2, title: 'what to buy', filter: 'completed'}
-    ])
 
 
     let [tasks, setTasks] = useState({
@@ -38,15 +33,11 @@ function App() {
         ]
 
     })
+    let [todolists, setTodolist] = useState<Array<TodolistType>>([
+        {todolistsId: todolistsId1, title: 'what to learn', filter: 'all'},
+        {todolistsId: todolistsId2, title: 'what to buy', filter: 'all'}
+    ])
 
-    // let [tasks, setTasks] = useState<Array<TasksType>>([
-    //     {taskId: v1(), title: 'CSS&HTML', isDone: true},
-    //     {taskId: v1(), title: 'JS', isDone: true},
-    //     {taskId: v1(), title: 'React', isDone: false},
-    //     {taskId: v1(), title: 'Redux', isDone: false}
-    // ]);
-
-    // let [filter, setFilter] = useState<FilterValuesType>('all');
 
 
     function addTask(todolistId: string, newTaskTitle: string) {
@@ -96,6 +87,9 @@ function App() {
     return (
         <div className="App">
 
+            <AddItemForm addItem={(newTaskTitle:string) => {alert(newTaskTitle)}}/>
+
+
             {todolists.map((todolist) => {
                 let tasksForTodolist = tasks[todolist.todolistsId];
                 if (todolist.filter === 'completed') {
@@ -104,6 +98,7 @@ function App() {
                 if (todolist.filter === 'active') {
                     tasksForTodolist = tasksForTodolist.filter(task => !task.isDone);
                 }
+
                 return <Todolist
                     key={todolist.todolistsId}
                     title={todolist.title}
