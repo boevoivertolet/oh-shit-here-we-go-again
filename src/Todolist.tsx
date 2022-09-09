@@ -2,6 +2,8 @@ import React, {ChangeEvent} from 'react';
 import {FilterValuesType} from './App';
 import {AddItemForm} from './AddItemForm';
 import {EditableSpan} from './EditableSpan';
+import {Button, Checkbox, IconButton} from '@material-ui/core';
+import {Delete} from '@material-ui/icons';
 
 
 export type TasksType = {
@@ -23,7 +25,7 @@ type TodolistPropsType = {
     filter: FilterValuesType
     todolistsId: string
     removeTodolist: (todolistId: string) => void
-    changeTodolistTitle: (todolistId: string, newTitle:string) => void
+    changeTodolistTitle: (todolistId: string, newTitle: string) => void
 }
 
 export function Todolist(props: TodolistPropsType) {
@@ -52,10 +54,13 @@ export function Todolist(props: TodolistPropsType) {
     return (
         <div>
             <h3><EditableSpan title={props.title} onChange={changeTodolistTitle}/>
-                <button onClick={removeTodolist}>-</button>
+                {/*<button onClick={removeTodolist}></button>*/}
+                <IconButton aria-label="delete" onClick={removeTodolist}>
+                    <Delete/> {/*заменил кнопку на иконку*/}
+                </IconButton>
             </h3>
             <AddItemForm addItem={addTask}/>
-            <ul>
+            <div>
                 {
                     props.tasks.map(task => {
                             const onClickRemoveTask = () => {
@@ -69,25 +74,30 @@ export function Todolist(props: TodolistPropsType) {
                                 props.changeTaskTitle(props.todolistsId, task.taskId, newTitle);
 
                             }
-                            return <li className={task.isDone ? 'is-done' : ''} key={task.taskId}><input
-                                onChange={checkboxOnChange} type="checkbox"
-                                checked={task.isDone}></input>
+                            return <div className={task.isDone ? 'is-done' : ''} key={task.taskId}><Checkbox
+                                color={'default'}
+                                onChange={checkboxOnChange}
+                                checked={task.isDone}></Checkbox>
+                                {/*заменил инпут*/}
                                 <EditableSpan title={task.title} onChange={onChangeTitleHandler}/>
-                                <button onClick={onClickRemoveTask}>-
-                                </button>
-                            </li>
+                                {/*<button onClick={onClickRemoveTask}>-*/}
+                                {/*</button>*/}
+                                <IconButton aria-label="delete" onClick={onClickRemoveTask}>
+                                    <Delete/> {/*заменил кнопку на иконку*/}
+                                </IconButton>
+                            </div>
                         }
                     )
                 }
-            </ul>
+            </div>
             <div>
-                <button className={props.filter === 'all' ? 'active-filter' : ''} onClick={filterAll}>All
-                </button>
-                <button className={props.filter === 'active' ? 'active-filter' : ''} onClick={filterActive}>Active
-                </button>
-                <button className={props.filter === 'completed' ? 'active-filter' : ''}
+                <Button color={'inherit'} variant={props.filter === 'all' ? 'contained' : 'text'} onClick={filterAll}>All
+                </Button>
+                <Button color={'inherit'} variant={props.filter === 'active' ? 'contained' : 'text'} onClick={filterActive}>Active
+                </Button>
+                <Button color={'inherit'} variant={props.filter === 'completed' ? 'contained' : 'text'}
                         onClick={filterCompleted}>Completed
-                </button>
+                </Button>
             </div>
         </div>
     )

@@ -1,7 +1,9 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
+import {Button, IconButton, TextField} from '@material-ui/core';
+import {PostAdd} from '@material-ui/icons';
 
 type AddItemFormPropsType = {
-    addItem: ( newTaskTitle: string) => void
+    addItem: (newTaskTitle: string) => void
 
 
 }
@@ -25,7 +27,7 @@ export function AddItemForm(props: AddItemFormPropsType) {
     }
     const addTask = () => {
         if (newTaskTitle.trim() !== '') {
-            props.addItem( newTaskTitle.trim());
+            props.addItem(newTaskTitle.trim());
         } else {
             setError('field is required')
         }
@@ -35,14 +37,25 @@ export function AddItemForm(props: AddItemFormPropsType) {
 
     return (
         <div>
-            <input
+            <TextField
+                label="what to do... ?"
                 value={newTaskTitle}
                 onChange={onChangeHandler}
                 onKeyPress={onKeyPressHandler}
-                className={error ? 'error' : ''}
+                error={!!error}
+                helperText={error}
             />
-            <button onClick={addTask}>+</button>
-            {error && <div className={'error-message'}>{error}</div>}
+            {/*<input*/}
+            {/*    value={newTaskTitle}*/}
+            {/*    onChange={onChangeHandler}*/}
+            {/*    onKeyPress={onKeyPressHandler}*/}
+            {/*    className={error ? 'error' : ''}*/}
+            {/*/>*/}
+            <IconButton  onClick={addTask}>
+                <PostAdd/>
+            </IconButton>
+            {/*{error && <div className={'error-message'}>{error}</div>}*/}
+             {/*добавил ерор из mat UI*/}
         </div>
     )
 }

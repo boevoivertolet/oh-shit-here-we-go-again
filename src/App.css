@@ -1,31 +1,31 @@
-.App {
-    padding: 30px;
-    display: flex;
-    font-size: 22px;
+/*.App {*/
+/*    padding: 30px;*/
+/*    display: flex;*/
+/*    font-size: 22px;*/
 
-}
+/*}*/
 
-.App > div {
-    margin-right: 50px;
-    border: black solid 1px;
-    border-radius: 15px;
-    padding: 20px;
-    text-align: center;
-}
+/*.App > div {*/
+/*    margin-right: 50px;*/
+/*    border: black solid 1px;*/
+/*    border-radius: 15px;*/
+/*    padding: 50px;*/
 
-.error {
-    border: deeppink 2px dashed;
-    background:pink ;
-}
+/*}*/
 
-.error-message {
-    color: deeppink;
-}
-.active-filter {
-    background: lightskyblue;
-    color:whitesmoke;
-    border: blue 2px solid;
-}
-.is-done {
-    opacity: 0.3;
-}
+/*.error {*/
+/*    border: deeppink 2px dashed;*/
+/*    background:pink ;*/
+/*}*/
+
+/*.error-message {*/
+/*    color: red;*/
+/*}*/
+/*.active-filter {*/
+/*    background: lightskyblue;*/
+/*    color:whitesmoke;*/
+/*    border: blue 2px solid;*/
+/*}*/
+/*.is-done {*/
+/*    opacity: 0.3;*/
+/*}*/
