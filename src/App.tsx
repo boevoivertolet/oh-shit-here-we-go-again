@@ -90,6 +90,7 @@ function App() {
         if (todolist) {
             todolist.title = newTitle
         }
+        setTodolist([...todolists])
     }
 
     function addTodolist(newTodolistTitle: string) {
