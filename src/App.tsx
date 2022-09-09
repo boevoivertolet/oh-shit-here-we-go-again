@@ -9,6 +9,9 @@ export type TodolistType = {
     title: string
     filter: FilterValuesType
 }
+type StateTaskType ={
+    [key: string]:  Array<TasksType>
+}
 
 export type FilterValuesType = 'all' | 'completed' | 'active';
 
@@ -18,7 +21,7 @@ function App() {
     let todolistsId2 = v1()
 
 
-    let [tasks, setTasks] = useState({
+    let [tasks, setTasks] = useState<StateTaskType>({
         [todolistsId1]: [
             {taskId: v1(), title: 'CSS&HTML', isDone: true},
             {taskId: v1(), title: 'JS', isDone: true},
