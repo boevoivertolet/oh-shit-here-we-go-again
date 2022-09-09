@@ -9,8 +9,8 @@ export type TodolistType = {
     title: string
     filter: FilterValuesType
 }
-type StateTaskType ={
-    [key: string]:  Array<TasksType>
+type StateTaskType = {
+    [key: string]: Array<TasksType>
 }
 
 export type FilterValuesType = 'all' | 'completed' | 'active';
@@ -91,6 +91,16 @@ function App() {
         setTasks({...tasks, [todolist.todolistsId]: []})
     }
 
+    function changeTaskTitle(todolistId: string, taskId: string, newTitle: string) {
+        let tasksForChangeStatus = tasks[todolistId]
+        let task = tasksForChangeStatus.find(task => task.taskId === taskId)
+        if (task) {
+            task.title = newTitle
+
+        }
+        setTasks({...tasks})
+
+    }
 
     return (
         <div className="App">
@@ -111,6 +121,7 @@ function App() {
                     key={todolist.todolistsId}
                     title={todolist.title}
                     tasks={tasksForTodolist}
+                    changeTaskTitle={changeTaskTitle}
                     removeTask={removeTask}
                     changeFilter={changeFilter}
                     addTask={addTask}
